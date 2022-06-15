@@ -1,0 +1,26 @@
+
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <button (click)="timerStatus(true)">Start</button>
+  <button (click)="timerStatus(false)">Stop</button>
+  <button (click)="callForClick()" (dblclick)="callForDblClick()">Wait</button>
+  <button (click)="resetTimer()">Reset</button>
+  <h3>{{minutes | timePipe}}:{{seconds | timePipe}}</h3>
+</div>
+
+<div class="content" role="main">
+
+</div>
+
+<router-outlet></router-outlet>
