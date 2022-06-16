@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,13 @@ export class AppComponent {
   myInt: any = null;
   isSingleClick: Boolean = true;
 
+  observable = new Observable((observer:any)=>{
+    this.myInt = setInterval(() => {
+      this.seconds += 1
+      observer.next(this.seconds)
+    }, 1000)
+  })
+
   minutesCheck() {
     if (this.seconds == 60) {
       this.minutes += 1
@@ -24,11 +32,10 @@ export class AppComponent {
     this.started = stat
     clearInterval(this.myInt)
     if (this.started == true) {
-      this.myInt = setInterval(() => {
-        this.seconds += 1
-        console.log(this.seconds)
+      this.observable.subscribe((x:any)=>{
         this.minutesCheck()
-      }, 1000)
+        console.log(x)
+      })
     }
     else if (this.started == false) {
       clearInterval(this.myInt)
@@ -37,7 +44,6 @@ export class AppComponent {
       console.log(this.seconds)
     }
   };
-
 
   callForClick() {
     this.isSingleClick = true;
